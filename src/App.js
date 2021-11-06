@@ -1,11 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import Routes from './Routes/Routes';
+import Rutas from './Routes/Rutas';
 
 const App = () =>{
   return (
     <div className="App">
-     <Routes></Routes>
+     <Rutas></Rutas>
     </div>
   );
 }

@@ -1,9 +1,11 @@
 import React from 'react'
+import Navbars from '../Components/Navbars'
 
 function PrivateLayout() {
     return (
         <div>
-            Este es private layout
+            <Navbars/>
+            public
         </div>
     )
 }
