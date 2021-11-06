@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Input = ({propertie}) => {
+const Input = ({propertie, width}) => {
     return (
-        <table align="center">
+        <table align="center" width={width}>
             <tr align="center">
                 <td align="left">
                     <font face="Verdana, Geneva, sans-serif" size="3" color="#1A4A77">
