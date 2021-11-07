@@ -3,7 +3,9 @@ import logo from '../../Media/logo.png'
 import fondoLogin from '../../Media/fondoLogin.png'
 import FOOTER from '../../Components/FOOTER'
 import Input from '../../Components/Input'
+import { Link } from 'react-router-dom'
 import Boton from '../../Components/Boton'
+
 
 function Index() {
     return (
@@ -18,20 +20,19 @@ function Index() {
                                 <td width="600" align="center">
                                     <table>
                                         <tr height="250">
-                                            <td align="center"><img src={logo} width="181" height="111" alt="logo"/></td>
+                                            <td align="center"><img src={logo} width="181" height="111" alt="logo" /></td>
                                         </tr>
                                         <tr height="200">
                                             <td>
-                                                <Input propertie="Nombre de Usuario" width="400"/>
-                                                <Input propertie="Contraseña" width="400"/>
+                                                <Input propertie="Nombre de Usuario" width="400" />
+                                                <Input propertie="Contraseña" width="400" />
                                             </td>
                                         </tr>
                                         <tr height="120">
                                             <td align="center">
-                                                
-                                                <button>
-                                                    <font face="Verdana, Geneva, sans-serif" size="3" color="#1A4A77"><strong>Ingresar</strong></font>
-                                                </button>
+                                                <Link to='/roles'>
+                                                    <Boton titulo="Ingresar"/>
+                                                </Link>
                                             </td>
                                         </tr>
                                     </table>
@@ -41,8 +42,8 @@ function Index() {
                     </td>
                 </tr>
             </table>
-            <FOOTER/>
-    </div>
+            <FOOTER />
+        </div>
     )
 }
 

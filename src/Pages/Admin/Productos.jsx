@@ -1,12 +1,12 @@
 import React from 'react'
-import NavBar from '../Components/NavBar'
-import FOOTER from '../Components/FOOTER'
-import TableNav from '../Components/TableNav'
-import TableTitle from '../Components/TableTitle'
-import CRUD from '../Components/CRUD'
-import ProductosRow from '../Components/ProductosRow'
+import NavBar from '../../Components/NavBar'
+import FOOTER from '../../Components/FOOTER'
+import TableNav from '../../Components/TableNav'
+import TableTitle from '../../Components/TableTitle'
+import CRUD from '../../Components/CRUD'
+import ProductosRow from '../../Components/ProductosRow'
 
-function PrivateLayout() {
+function Productos() {
     return (
         <div>
             <NavBar site="Gestión de Productos" alternativa1="Gestion de roles" alternativa2="Gestión de ventas" />
@@ -38,4 +38,4 @@ function PrivateLayout() {
         </div>
     )
 }
-export default PrivateLayout
+export default Productos
