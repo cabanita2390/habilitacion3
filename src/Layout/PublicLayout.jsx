@@ -5,7 +5,6 @@ function PublicLayout() {
     return (
         <div>
             <Navbars/>
-            public
         </div>
     )
 }
