@@ -2,6 +2,8 @@ const { response } = require('express');
 //const { validationResult } = require('express-validator'); para usar validaciones
 const bcrypt = require('bcryptjs');
 const Usuario = require('../models/Usuario');
+const { generarJWT } = require('../helpers/jwt');
+
 
 
 const crearUsuario = async (req, resp = response) => {
@@ -30,7 +32,7 @@ const crearUsuario = async (req, resp = response) => {
 
         resp.status(201).json({
             ok: true,
-            msg: 'Registro',
+            msg: 'Registro de usuario exitoso',
             udi: usuario.id,
             name: usuario.name
         });
@@ -66,11 +68,14 @@ const loginUsuario = async (req, resp = response) => {
                 msg: 'Usuario o contraseña erradas'
             });
         }
+        //generar token
+        const token = await generarJWT(usuario.id, usuario.name);
         resp.json({
             ok: true,
             msg: 'Ok',
             uid: usuario.id,
-            name: usuario.name
+            name: usuario.name,
+            token
         });
     } catch (error) {
         resp.status(500).json({
@@ -80,10 +85,15 @@ const loginUsuario = async (req, resp = response) => {
     }
 }
 
-const revalidarToken = (req, resp = response) => {
+const revalidarToken = async (req, resp = response) => {
+
+    const { uid, name } = req;
+    //generar nuevo token
+    const token = await generarJWT(uid, name);
+
     resp.json({
         ok: true,
-        msg: 'renew'
+        token: token
     });
 }
 

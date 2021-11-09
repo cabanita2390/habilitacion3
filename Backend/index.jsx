@@ -2,6 +2,7 @@
 const express = require('express');
 require('dotenv').config();//para que lea el .env
 const { dbConnection } = require('./database/config');
+const cors = require('cors');
 
 //console.log(process.env);
 
@@ -11,6 +12,9 @@ const app = express();
 // Levantar conexion a la BD
 dbConnection();
 
+//Usar cors
+app.use(cors());
+
 // Directorio publico
 app.use(express.static('Public'));
 
@@ -18,6 +22,8 @@ app.use(express.json());
 // Rutas
 
 app.use('/api/auth', require('./Routes/auth'));
+app.use('/api/productos', require('./Routes/Productos'));
+
 // path => dominio.com/api/auth/login
 // app.get('/', (req, res)=>{
 //     res.json({
