@@ -23,6 +23,7 @@ app.use(express.json());
 
 app.use('/api/auth', require('./Routes/auth'));
 app.use('/api/productos', require('./Routes/Productos'));
+app.use('/api/vendedores', require('./Routes/Vendedores'));
 
 // path => dominio.com/api/auth/login
 // app.get('/', (req, res)=>{

@@ -10,4 +10,4 @@ const CategoriaSchema = Schema({
     collection: 'categorias'
 });
 
-module.exports = model('Categoria', CategoriaSchema);
+module.exports = model('categoria', CategoriaSchema);

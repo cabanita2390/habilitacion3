@@ -1,6 +1,6 @@
 const { response } = require('express');
 const Categoria = require('../models/Categoria');
-const Producto = require('../models/Producto');
+const Producto = require('../models/producto');
 
 /**getProductos */
 
@@ -13,7 +13,7 @@ const getProductos = async (req, resp = response) => {
     //                                 .populate('category');
 
     const productos = await Producto.find()
-                                    .populate('category', 'name');    
+                                        
 
     resp.status(200).json({
         ok: true,
@@ -75,7 +75,7 @@ const actualizarProducto = async (req, resp = response) => {
         console.log(error);
         resp.status(500).json({
             ok: false,
-            msg: 'error al crear el producto',
+            msg: 'error al actualizar el producto',
         });
     }
 }
@@ -109,7 +109,7 @@ const eliminarProducto = async (req, resp = response) => {
         console.log(error);
         resp.status(500).json({
             ok: false,
-            msg: 'error al crear el producto',
+            msg: 'error al eliminar el producto',
         });
     }
 }
