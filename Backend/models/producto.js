@@ -8,12 +8,12 @@ const ProductoSchema = Schema({
     bar_code: {
         type: String,
         required: true
+    },
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: 'Categoria',
+        required: true
     }
-    // category: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'Categoria',
-    //     required: true
-    // }
 }, );
 
 module.exports = model('Producto', ProductoSchema);

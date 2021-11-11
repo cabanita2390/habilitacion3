@@ -1,10 +1,11 @@
 const e = require('express');
 const { response } = require('express');
+const Perfil = require('../models/Perfil');
 const Vendedor = require('../models/Vendedor');
 
 const getVendedores = async(req, resp = response) => {
-    const vendedores = await Vendedor.find()
-                                        //.populate('perfil');
+    const vendedores = await Vendedor.find();
+                                      //.populate('perfiles');
                   
     resp.status(200).json({
         ok: true,
@@ -86,7 +87,7 @@ const eliminarVendedor = async(req, resp = response) => {
 
         resp.status(200).json({
             ok: true,
-            msg: 'Vendedor eliminado correctament'
+            msg: 'Vendedor eliminado correctamente'
         });
     } catch (error) {
         console.log(error);
@@ -97,10 +98,21 @@ const eliminarVendedor = async(req, resp = response) => {
     }
 }
 
+const getPerfiles = async (req, resp = response ) => {
+    
+    const perfiles = await Perfil.find();
+    resp.status(200).json({
+        ok: true,
+        msg: 'Lista de perfiles',
+        perfiles
+    });
+}
+
 module.exports = {
     getVendedores,
     setVendedor,
     actualizarVendedor,
-    eliminarVendedor
+    eliminarVendedor,
+    getPerfiles
 }
 
