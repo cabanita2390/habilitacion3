@@ -2,8 +2,10 @@ const { Router } = require('express');
 const { getVendedores, setVendedor, actualizarVendedor, eliminarVendedor, getPerfiles } = require('../controllers/vendedores')
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
-const { getCategorias } = require('../controllers/productos');
+const { validarJWT } = require('../middlewares/validar-jwt');
 const router = Router();
+
+router.use(validarJWT);
 
 router.get('/listar', getVendedores);
 

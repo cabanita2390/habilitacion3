@@ -1,6 +1,8 @@
 const e = require('express');
 const { response } = require('express');
+const bcrypt = require('bcryptjs');
 const Perfil = require('../models/Perfil');
+const Usuario = require('../models/Usuario');
 const Vendedor = require('../models/Vendedor');
 
 const getVendedores = async(req, resp = response) => {
@@ -15,14 +17,27 @@ const getVendedores = async(req, resp = response) => {
 }
 
 const setVendedor = async(req, resp = response) => {
-    const vendedor = new Vendedor(req.body);
+
+    const { usuario, password } = new Vendedor(req.body);
 
     try {
-        const ven = await vendedor.save();
+        let vendedor = await Vendedor.findOne({ usuario });
+        if(vendedor){
+            return resp.status(400).json({
+                ok: false,
+                msg: 'Ya existe un vendedor registrado con ese Username'
+            })
+        }
+        vendedor = new Vendedor(req.body);
+        const salt = bcrypt.genSaltSync();
+        vendedor.password = bcrypt.hashSync(password, salt);
+
+        await vendedor.save();
+
         resp.status(201).json({
             ok: true,
             msg: 'Vendedor creado',
-            vendedor: ven
+            vendedor: vendedor
         });
     } catch (error) {
         console.log(error);
