@@ -14,6 +14,7 @@ router.post(
     [
         check('nombre','El nombre del vendedor es obligatorio').not().isEmpty(),
         check('usuario','El usuario del vendedor es obligatorio').not().isEmpty(),
+        check('password', 'La contraseña es obligatoria').not().isEmpty(),
         check('perfil','El perfil del vendedor es obligatorio').not().isEmpty(),
         check('estado','El estado del vendedor es obligatorio').not().isEmpty(),
         validarCampos
@@ -25,6 +26,7 @@ router.put(
     [
         check('nombre','El nombre del vendedor es obligatorio').not().isEmpty(),
         check('usuario','El usuario del vendedor es obligatorio').not().isEmpty(),
+        check('password', 'La contraseña es obligatoria').not().isEmpty(),
         check('perfil','El perfil del vendedor es obligatorio').not().isEmpty(),
         check('estado','El estado del vendedor es obligatorio').not().isEmpty(),
         validarCampos

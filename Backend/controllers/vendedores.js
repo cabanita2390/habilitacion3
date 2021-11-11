@@ -46,19 +46,15 @@ const setVendedor = async(req, resp = response) => {
             msg: 'Error al crear Vendedor',
         })
     }
-    resp.status(200).json({
-        ok: true,
-        msg: 'Crear vendedor',
-        vendedor
-    });
 }
 
 const actualizarVendedor = async(req, resp = response) => {
     
     const vendedorId = req.params.id;
+    // const {password} = new Vendedor(req.body);
 
     try {
-        const vendedorActu = await Vendedor.findById(vendedorId);
+        let vendedorActu = await Vendedor.findById(vendedorId);
 
         if(!vendedorActu){
             resp.status(404).json({
@@ -66,6 +62,10 @@ const actualizarVendedor = async(req, resp = response) => {
                 msg: 'El Id del vendedor no coincide con ningun elemento de la base de datos',
             });
         }
+
+        // vendedorActu = new Vendedor(req.body);
+        // const salt = bcrypt.genSaltSync();
+        // vendedorActu.password = bcrypt.hashSync(password, salt);
 
         const vendedorActualizado = await Vendedor.findByIdAndUpdate(vendedorId, req.body, { new: true});
 
