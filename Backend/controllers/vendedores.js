@@ -2,7 +2,6 @@ const e = require('express');
 const { response } = require('express');
 const bcrypt = require('bcryptjs');
 const Perfil = require('../models/Perfil');
-const Usuario = require('../models/Usuario');
 const Vendedor = require('../models/Vendedor');
 
 const getVendedores = async(req, resp = response) => {
@@ -50,11 +49,12 @@ const setVendedor = async(req, resp = response) => {
 
 const actualizarVendedor = async(req, resp = response) => {
     
+
     const vendedorId = req.params.id;
-    // const {password} = new Vendedor(req.body);
+    //const password = new Vendedor(req.body);
 
     try {
-        let vendedorActu = await Vendedor.findById(vendedorId);
+        const vendedorActu = await Vendedor.findById(vendedorId);
 
         if(!vendedorActu){
             resp.status(404).json({
@@ -62,10 +62,6 @@ const actualizarVendedor = async(req, resp = response) => {
                 msg: 'El Id del vendedor no coincide con ningun elemento de la base de datos',
             });
         }
-
-        // vendedorActu = new Vendedor(req.body);
-        // const salt = bcrypt.genSaltSync();
-        // vendedorActu.password = bcrypt.hashSync(password, salt);
 
         const vendedorActualizado = await Vendedor.findByIdAndUpdate(vendedorId, req.body, { new: true});
 
