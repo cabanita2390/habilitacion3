@@ -1,10 +1,14 @@
 import React from 'react'
-import Navbars from '../Components/Navbars'
+
 
 function PublicLayout() {
     return (
         <div>
+<<<<<<< HEAD
             <Navbars/>
+=======
+            
+>>>>>>> Cambios_Alejandro
         </div>
     )
 }
