@@ -4,10 +4,10 @@ const bcrypt = require('bcryptjs');
 const Perfil = require('../models/Perfil');
 const Vendedor = require('../models/Vendedor');
 
-const getVendedores = async(req, resp = response) => {
+const getVendedores = async (req, resp = response) => {
     const vendedores = await Vendedor.find();
-                                      //.populate('perfiles');
-                  
+    //.populate('perfiles');
+
     resp.status(200).json({
         ok: true,
         msg: 'Lista de vendedores',
@@ -15,13 +15,13 @@ const getVendedores = async(req, resp = response) => {
     });
 }
 
-const setVendedor = async(req, resp = response) => {
+const setVendedor = async (req, resp = response) => {
 
     const { usuario, password } = new Vendedor(req.body);
 
     try {
         let vendedor = await Vendedor.findOne({ usuario });
-        if(vendedor){
+        if (vendedor) {
             return resp.status(400).json({
                 ok: false,
                 msg: 'Ya existe un vendedor registrado con ese Username'
@@ -47,23 +47,37 @@ const setVendedor = async(req, resp = response) => {
     }
 }
 
-const actualizarVendedor = async(req, resp = response) => {
-    
+const actualizarVendedor = async (req, resp = response) => {
+
 
     const vendedorId = req.params.id;
-    //const password = new Vendedor(req.body);
+    const { usuario, password } = new Vendedor(req.body);
 
     try {
-        const vendedorActu = await Vendedor.findById(vendedorId);
+        let vendedorActu = await Vendedor.findById(vendedorId);
 
-        if(!vendedorActu){
+        if (!vendedorActu) {
             resp.status(404).json({
                 ok: false,
                 msg: 'El Id del vendedor no coincide con ningun elemento de la base de datos',
             });
+        } else {
+            let vendedor = await Vendedor.findOne({ usuario });
+            if (vendedor) {
+                return resp.status(400).json({
+                    ok: false,
+                    msg: 'Ya existe un vendedor registrado con ese Username'
+                })
+            }
         }
 
-        const vendedorActualizado = await Vendedor.findByIdAndUpdate(vendedorId, req.body, { new: true});
+        // vendedor = new Vendedor(req.body);
+        // console.log("esa", vendedor.password);
+        // const salt = bcrypt.genSaltSync();
+        // vendedor.password = bcrypt.hashSync(password, salt);
+        // console.log("esas",vendedor.password);
+
+        const vendedorActualizado = await Vendedor.findByIdAndUpdate(vendedorId, req.body, { new: true });
 
         resp.status(200).json({
             ok: true,
@@ -80,14 +94,14 @@ const actualizarVendedor = async(req, resp = response) => {
     }
 }
 
-const eliminarVendedor = async(req, resp = response) => {
-    
+const eliminarVendedor = async (req, resp = response) => {
+
     const vendedorId = req.params.id;
 
     try {
         const vendedor = await Vendedor.findById(vendedorId);
 
-        if(!vendedor){
+        if (!vendedor) {
             resp.status(404).json({
                 ok: false,
                 msg: 'El Id del vendedor no coincide con ningun elemento de la base de datos',
@@ -109,8 +123,8 @@ const eliminarVendedor = async(req, resp = response) => {
     }
 }
 
-const getPerfiles = async (req, resp = response ) => {
-    
+const getPerfiles = async (req, resp = response) => {
+
     const perfiles = await Perfil.find();
     resp.status(200).json({
         ok: true,
